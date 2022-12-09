@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Card.css'
 
 const Card = ({ product }) => {
     const { img, img2, title, newPrice, oldPrice, isNew } = product;
     return (
-        <div>
+        <Link to={`/product/${product.id}`}>
             <div className='h-[240px] overflow-hidden relative img'>
                 <img src={img} alt={title} />
                 <img src={img2} className='img2 absolute top-0 left-0 hidden z-10' alt={title} />
@@ -15,7 +16,7 @@ const Card = ({ product }) => {
                 <h3 className='text-lg line-through'>${oldPrice}</h3>
                 <h3 className='text-lg font-semibold'>${newPrice}</h3>
             </div>
-        </div>
+        </Link>
     );
 };
 

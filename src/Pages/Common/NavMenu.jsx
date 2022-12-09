@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegHeart, FaSearch, FaShoppingCart } from 'react-icons/fa';
 import { BsPersonFill } from 'react-icons/bs';
+import Cart from './Cart';
 
 const NavMenu = () => {
+    const [open, setOpen] = useState(false);
 
     return (
         <div>
@@ -25,12 +27,13 @@ const NavMenu = () => {
                     <FaSearch />
                     <BsPersonFill />
                     <FaRegHeart />
-                    <div className='relative'>
+                    <div className='relative cursor-pointer' onClick={() => setOpen(!open)}>
                         <FaShoppingCart />
                         <span className=' absolute h-5 w-5 rounded-full bg-blue-400 text-sm flex justify-center -top-3 -right-3'>0</span>
                     </div>
                 </div>
             </div>
+            {open && <Cart></Cart>}
         </div>
     );
 };
