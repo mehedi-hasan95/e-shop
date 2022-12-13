@@ -7,8 +7,9 @@ const Home = () => {
     return (
         <div>
             <Slider></Slider>
-            <FeaturedProducts />
+            <FeaturedProducts type='trending' />
             <Categories />
+            <FeaturedProducts type='featured' />
         </div>
     );
 };
