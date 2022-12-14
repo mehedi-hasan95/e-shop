@@ -1,31 +1,11 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Loading from '../../../Components/Loading/Loading';
+import useFetch from '../../../Hooks/useFetch';
 import Card from './Card/Card';
 
 const FeaturedProducts = ({ type }) => {
 
-
-    const [products, setProducts] = useState([]);
-    console.log(products);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await axios.get(process.env.REACT_APP_SERVER_API + `/products?populate=*&filters[type][$eq]=${type}`, {
-                    headers: {
-                        Authorization: `bearar ${process.env.REACT_APP_SECRET_TOKEN}`
-                    }
-                })
-                setProducts(res.data.data)
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
-        fetchData();
-    }, [type]);
-
-
+    const { products, loading } = useFetch(`/products?populate=*&filters[type][$eq]=${type}`);
 
     return (
         <div>
@@ -36,10 +16,14 @@ const FeaturedProducts = ({ type }) => {
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pt-10 gap-5'>
                     {
+                        loading ?
+                        <Loading />
+                        :
                         products?.map(product => <Card key={product.id} product={product}></Card>)
                     }
                 </div>
             </>}
+             
         </div>
     );
 };

@@ -1,28 +1,29 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import useFetch from '../../Hooks/useFetch';
 import ProductsList from './ProductsList/ProductsList';
 
 const Products = () => {
     const catId = parseInt(useParams().id);
     const [maxPrice, setMaxPrice] = useState(5000);
     const [sort, setSort] = useState(null);
+
+
+    const { products, loading } = useFetch(`/sub-categories?[filters][categories][id][$eq]=${catId}`);
+    console.log(products);
     return (
         <div className='flex'>
             <div className='w-[400px]'>
                 <div>
                     <h2 className='text-xl font-semibold'>Products Categories</h2>
-                    <div>
-                        <input type="checkbox" id="1" value={1} />
-                        <label htmlFor="1" className=' pl-2'>Men</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="2" value={2} />
-                        <label htmlFor="2" className=' pl-2'>Women</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="3" value={3} />
-                        <label htmlFor="3" className=' pl-2'>Winter</label>
-                    </div>
+                    {
+                        products?.map(item => (
+                            <div key={item.id}>
+                                <input type="checkbox" id={item.attributes.id} value={item.attributes.id} />
+                                <label htmlFor={item.attributes.id} className=' pl-2'>{item.attributes.title}</label>
+                            </div>
+                        ))
+                    }
                 </div>
                 <div>
                     <h2 className='text-xl font-semibold mt-7'>Filter by Price</h2>

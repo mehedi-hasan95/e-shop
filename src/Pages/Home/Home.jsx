@@ -7,9 +7,9 @@ const Home = () => {
     return (
         <div>
             <Slider></Slider>
-            <FeaturedProducts type='trending' />
-            <Categories />
             <FeaturedProducts type='featured' />
+            <Categories />
+            <FeaturedProducts type='trending' />
         </div>
     );
 };
