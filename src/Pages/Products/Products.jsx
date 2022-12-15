@@ -6,7 +6,7 @@ import ProductsList from './ProductsList/ProductsList';
 const Products = () => {
     const catId = parseInt(useParams().id);
     const [maxPrice, setMaxPrice] = useState(50);
-    const [sort, setSort] = useState(null);
+    const [sort, setSort] = useState('asc');
     const [selectSubCat, setSelectSubCat] = useState([]);
 
     const catChange = (e) => {

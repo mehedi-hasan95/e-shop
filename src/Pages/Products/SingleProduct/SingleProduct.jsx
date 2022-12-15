@@ -1,31 +1,32 @@
 import React, { useState } from 'react';
 import { FaBalanceScale, FaRegHeart, FaShoppingCart } from 'react-icons/fa';
+import { useParams } from 'react-router-dom';
+import useFetch from '../../../Hooks/useFetch';
 
 const SingleProduct = () => {
-    const [currentImage, setCurrentImage] = useState(0);
+    const id = useParams().id;
+    const [currentImage, setCurrentImage] = useState('img');
     const [quantity, setQuantity] = useState(1);
-    const images = [
-        'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-        'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-        'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1099&q=80'
-    ]
+    
+    const { products, loading } = useFetch(`/products/${id}?populate=*`);
+    console.log(products?.attributes?.newPrice);
+
     return (
         <div className='flex gap-5 mt-10'>
             <div className='flex gap-5 flex-1'>
                 <div className='flex flex-col gap-5'>
-                    <img className='h-28 w-full object-cover cursor-pointer' src={images[0]} alt="" onClick={e => setCurrentImage(0)} />
-                    <img className='h-28 w-full object-cover cursor-pointer' src={images[1]} alt="" onClick={e => setCurrentImage(1)} />
-                    <img className='h-28 w-full object-cover cursor-pointer' src={images[2]} alt="" onClick={e => setCurrentImage(2)} />
+                    <img className='h-28 w-full object-cover cursor-pointer' src={process.env.REACT_APP_IMG_URL + products?.attributes?.img?.data?.attributes?.url} alt="" onClick={e => setCurrentImage('img')} />
+                    <img className='h-28 w-full object-cover cursor-pointer' src={process.env.REACT_APP_IMG_URL + products?.attributes?.img2?.data?.attributes?.url} alt="" onClick={e => setCurrentImage('img2')} />
                 </div>
                 <div>
-                    <img src={images[currentImage]} className=' max-h-96 md:max-h-[600px] lg:max-h-[800px] object-cover w-full' alt="" />
+                    <img src={process.env.REACT_APP_IMG_URL + products?.attributes?.[currentImage]?.data?.attributes?.url} className=' max-h-96 md:max-h-[600px] lg:max-h-[800px] object-cover w-full' alt="" />
                 </div>
             </div>
             <div className='flex gap-5 flex-1'>
                 <div>
-                    <h2 className='text-2xl'>Title</h2>
-                    <h3 className='my-5 text-2xl text-blue-500'>$19.99</h3>
-                    <p className='mb-5'>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Non et quo ipsum praesentium est, rem aspernatur voluptatum voluptas impedit esse consequuntur pariatur? Iusto magni quis porro voluptas architecto nemo ipsum fugiat cumque voluptates reprehenderit! Debitis.</p>
+                    <h2 className='text-2xl'>{products?.attributes?.title}</h2>
+                    <h3 className='my-5 text-2xl text-blue-500'>${products?.attributes?.newPrice}</h3>
+                    <p className='mb-5'>{products?.attributes?.desc}</p>
                     <button className='bg-gray-400 h-12 w-12 justify-center items-center' onClick={() => setQuantity(prev => prev === 1 ? 1 : prev - 1)}>-</button>
                     <span className='mx-4'>{quantity}</span>
                     <button className='bg-gray-400 h-12 w-12 justify-center items-center' onClick={() => setQuantity(prev => prev + 1)}>+</button>
