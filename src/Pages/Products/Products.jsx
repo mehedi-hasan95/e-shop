@@ -45,11 +45,11 @@ const Products = () => {
                 <div>
                     <h2 className='text-xl font-semibold mt-7'>Sort by</h2>
                     <div>
-                        <input type="radio" name="price" id="asc" value="asc" onChange={e => setSort('asc')} />
+                        <input className='mr-2' type="radio" name="price" id="asc" value="asc" onChange={e => setSort('asc')} />
                         <label htmlFor="asc">Price (Lowest first)</label>
                     </div>
                     <div>
-                        <input type="radio" name="price" id="desc" value="desc" onChange={e => setSort('desc')} />
+                        <input className='mr-2' type="radio" name="price" id="desc" value="desc" onChange={e => setSort('desc')} />
                         <label htmlFor="desc">Price (Highest first)</label>
                     </div>
                 </div>

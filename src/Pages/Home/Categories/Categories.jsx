@@ -13,7 +13,7 @@ const Categories = () => {
                             alt=""
                         />
                         <button className="absolute min-w-[100px] h-12 p-3 top-0 bottom-0 left-0 right-0 m-auto cursor-pointer border-none bg-white uppercase font-semibold w-fit">
-                            <Link className="link" to="/products/1">
+                            <Link className="link" to="/cetegory/1">
                                 Sale
                             </Link>
                         </button>
@@ -24,7 +24,7 @@ const Categories = () => {
                             alt=""
                         />
                         <button className="absolute min-w-[100px] h-12 p-3 top-0 bottom-0 left-0 right-0 m-auto cursor-pointer border-none bg-white uppercase font-semibold w-fit">
-                            <Link to="/products/2" className="link">
+                            <Link to="/cetegory/2" className="link">
                                 Women
                             </Link>
                         </button>
@@ -37,7 +37,7 @@ const Categories = () => {
                             alt=""
                         />
                         <button className="absolute min-w-[100px] h-12 p-3 top-0 bottom-0 left-0 right-0 m-auto cursor-pointer border-none bg-white uppercase font-semibold w-fit">
-                            <Link to="/products/3" className="link">
+                            <Link to="/cetegory/3" className="link">
                                 New Season
                             </Link>
                         </button>
@@ -52,7 +52,7 @@ const Categories = () => {
                                     alt=""
                                 />
                                 <button className="absolute min-w-[100px] h-12 p-3 top-0 bottom-0 left-0 right-0 m-auto cursor-pointer border-none bg-white uppercase font-semibold w-fit">
-                                    <Link to="/products/4" className="link">
+                                    <Link to="/cetegory/4" className="link">
                                         Men
                                     </Link>
                                 </button>
@@ -65,7 +65,7 @@ const Categories = () => {
                                     alt=""
                                 />
                                 <button className="absolute min-w-[100px] h-12 p-3 top-0 bottom-0 left-0 right-0 m-auto cursor-pointer border-none bg-white uppercase font-semibold w-fit">
-                                    <Link to="/products/5" className="link">
+                                    <Link to="/cetegory/5" className="link">
                                         Accessories
                                     </Link>
                                 </button>
@@ -78,7 +78,7 @@ const Categories = () => {
                             alt=""
                         />
                         <button className="absolute min-w-[100px] h-12 p-3 top-0 bottom-0 left-0 right-0 m-auto cursor-pointer border-none bg-white uppercase font-semibold w-fit">
-                            <Link to="/products/6" className="link">
+                            <Link to="/cetegory/6" className="link">
                                 Winter
                             </Link>
                         </button>
