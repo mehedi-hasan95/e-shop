@@ -5,12 +5,21 @@ import ProductsList from './ProductsList/ProductsList';
 
 const Products = () => {
     const catId = parseInt(useParams().id);
-    const [maxPrice, setMaxPrice] = useState(5000);
+    const [maxPrice, setMaxPrice] = useState(50);
     const [sort, setSort] = useState(null);
+    const [selectSubCat, setSelectSubCat] = useState([]);
 
+    const catChange = (e) => {
+        const value = e.target.value;
+        const isChecke = e.target.checked;
 
-    const { products, loading } = useFetch(`/sub-categories?[filters][categories][id][$eq]=${catId}`);
-    console.log(products);
+        setSelectSubCat(isChecke ? [...selectSubCat, value] : selectSubCat.filter(item => item !==value));
+    }
+
+    console.log(selectSubCat);
+
+    const { products } = useFetch(`/sub-categories?[filters][categories][id][$eq]=${catId}`);
+    
     return (
         <div className='flex'>
             <div className='w-[400px]'>
@@ -19,8 +28,8 @@ const Products = () => {
                     {
                         products?.map(item => (
                             <div key={item.id}>
-                                <input type="checkbox" id={item.attributes.id} value={item.attributes.id} />
-                                <label htmlFor={item.attributes.id} className=' pl-2'>{item.attributes.title}</label>
+                                <input type="checkbox" id={item.id} value={item.id} onChange={catChange} />
+                                <label htmlFor={item.id} className=' pl-2'>{item.attributes.title}</label>
                             </div>
                         ))
                     }
@@ -29,7 +38,7 @@ const Products = () => {
                     <h2 className='text-xl font-semibold mt-7'>Filter by Price</h2>
                     <div>
                         <span>0</span>
-                        <input type="range" min={0} max={5000} className='mx-2' onChange={e => setMaxPrice(e.target.value)} />
+                        <input type="range" min={0} max={50} className='mx-2' onChange={e => setMaxPrice(e.target.value)} />
                         <span>{maxPrice}</span>
                     </div>
                 </div>
@@ -47,7 +56,7 @@ const Products = () => {
             </div>
             <div className='w-full'>
                 <img className='w-full h-[300px] object-cover bg-center' src="https://images.unsplash.com/photo-1517111856508-8a6984d65c75?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1073&q=80" alt="" />
-                <ProductsList catId={catId} maxPrice={maxPrice} sort={sort} />
+                <ProductsList catId={catId} maxPrice={maxPrice} sort={sort} selectSubCat={selectSubCat} />
             </div>
         </div>
     );
